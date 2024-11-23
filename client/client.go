@@ -8,14 +8,17 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
 
 var username string;
+var clt proto.AuctionClient;
 
 func main() {
+	clt = createClient(":50051")
 	log.Println("Bidding started! Come closer everybody!")
 	input := bufio.NewScanner(os.Stdin)
 	log.Println("Write your username (no spaces):")
@@ -24,7 +27,7 @@ func main() {
 
 	
 	for {
-		
+		log.Println("Options: bid [amount] ; results")
 		input.Scan()
 		inputList := strings.Split(input.Text(), " ")
 		if inputList[0] == "bid"{
@@ -36,9 +39,9 @@ func main() {
 			}
 			bid.Amount = float32(bidAmount)
 			bid.Username = username
-			sendBid(&bid, ":1234")
+			sendBid(&bid, clt)
 		}else if inputList[0] == "results"{
-			outcome, err := getResults(":1234")
+			outcome, err := getResults(clt)
 			if err != nil{
 				log.Fatalln("Some error happened when getting results")
 				continue
@@ -52,41 +55,39 @@ func main() {
 				log.Println("The auction is not over yet!")
 				log.Printf("The highest bid: %d \n", &outcome.Price)
 			}
+		}else {
+			log.Println("Unknown command!")
 		}
 	}
 }
 
-func sendBid(bid *proto.Amount, port string){
-	
+func createClient(port string) (proto.AuctionClient){
 	grpcOptions := grpc.WithTransportCredentials(insecure.NewCredentials())
 	conn, err := grpc.NewClient(port, grpcOptions)
 	if err != nil {
-		log.Fatalf("Couldn't open client")
-		return
+		panic("Couldnt open client")
 	}
+	defer conn.Close()
+	return proto.NewAuctionClient(conn)
+}
 
-	client := proto.NewAuctionClient(conn)
-	ctx := context.Background()
+func sendBid(bid *proto.Amount, client proto.AuctionClient){
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 	ack, err := client.Bid(ctx, bid)
 	log.Println(ack)
-	if !ack.Acknowledge{
-		log.Println("Wrongful bid; Either too low or not a number!")
-	}else if err != nil{
+	if err != nil{
 		log.Fatalf("The bid did not go through!")
+	}else if !ack.Acknowledge{
+		log.Println("Wrongful bid; Either too low or not a number!")
 	}else{
 		log.Println("Your bid went through!")
 	}
 }
 
-func getResults(port string) (proto.Outcome, error){
-	grpcOptions := grpc.WithTransportCredentials(insecure.NewCredentials())
-	conn, err := grpc.NewClient(port, grpcOptions)
-	if err != nil{
-		return proto.Outcome{}, err
-	}
-
-	client := proto.NewAuctionClient(conn)
-	ctx := context.Background()
+func getResults(client proto.AuctionClient) (proto.Outcome, error){
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 	outcome, err := client.Result(ctx, &proto.AuctionHouse{})
 	if err != nil{
 		log.Fatalln("Couldnt get result!")
