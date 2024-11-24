@@ -36,11 +36,31 @@
 \maketitle
 
 \subsection{Introduction}
-A short introduction to what you have done.
+This small GoLang program is a demo of active replication. A list of ports can be added to a .env file,
+which the clients and server (nodes) can use to find their respective ports.
+
+The demo assumes that no messages are lost, which would require some alteration to the code if this was the case.
+
 \subsection{Architecture}
 A description of the architecture of the system and its protocols (behaviour), including any protocols used internally between nodes of the system. 
-\subsection{Correctness}
-Argue whether your implementation satisfies linearisability or sequential consistency. In order to do so, first, you must state precisely what such property is. 
+\subsection{Correctness 1.}
+Argue whether your implementation satisfies linearisability or sequential consistency. In order to do so, first, you must state precisely what such property is.
+
+If a system is linearizable it means that the systems needs to process operations according to their real-time invocation.
+This includes the travel time of messages sent in the system. So if user farther away from a server sends a request,
+that request has to be processed before a possible closer invocation.
+
+This demo does not satisfy this requirement because of potential race conditions between the servers (nodes) and clients.
+Ofcourse this demo runs locally on the same machine, which minimizes the risk for out of order handling of the requests.
+
+But if the system were deployed globally, theses race conditions would become every more problematic.
+
+
+A sequential consistant system does not need the real-time order, but the timeline of operations still needs to be the same on every client.
+
+This is easier to deal with, and if the nodes in the demo locked a central database, then the system could be sqeuential consistant.
+Altough that would mean that there is a single point of failure on the database that also would need to be accounted for.
+
 \subsection{Correctness 2.}
 An argument that your protocol is correct in the absence and the presence of failure
 
