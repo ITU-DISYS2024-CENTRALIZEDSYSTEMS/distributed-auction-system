@@ -39,7 +39,6 @@ which the clients and server (nodes) can use to find their respective ports.
 The demo assumes that no messages are lost, which would require some alteration to the code if this was the case.
 
 \section{Architecture}
-A description of the architecture of the system and its protocols (behavior), including any protocols used internally between nodes of the system.\\
 Our implementation of the distributed auction system applies the active replication principle, which means that the installed servers do not have a primary server. Instead, they all maintain a direct connection to the clients.\\
 To validate the responses given by the servers, we could implement a system that compares all responses from the servers and selects the response that occurs most frequently - as a form of pseudo consensus between the servers. This ensures that no corrupt server can provide an incorrect response to mislead the client.
 Furthermore, it guarantees that a single server can crash or go offline while the clients can still access the service without any downtime. Communication between clients and servers is facilitated through gRPC and protocol buffers (proto).\\\\
