@@ -43,13 +43,13 @@ The demo assumes that no messages are lost, which would require some alteration 
 \section{Architecture}
 A description of the architecture of the system and its protocols (behavior), including any protocols used internally between nodes of the system.\\
 Our implementation of the distributed auction system applies the active replication principle, which means that the installed servers do not have a primary server. Instead, they all maintain a direct connection to the clients.\\
-To validate the responses given by the servers, we implemented a system that compares all responses from the servers and selects the response that occurs most frequently. This ensures that no corrupt server can provide an incorrect response to mislead the client.
+To validate the responses given by the servers, we could implement a system that compares all responses from the servers and selects the response that occurs most frequently - as a form of pseudo consensus between the servers. This ensures that no corrupt server can provide an incorrect response to mislead the client.
 Furthermore, it guarantees that a single server can crash or go offline while the clients can still access the service without any downtime. Communication between clients and servers is facilitated through gRPC and protocol buffers (proto).\\\\
 This means that our service has two APIs: one for bidding ($bid$) and one for retrieving the auction results ($result$). These APIs use proto objects, which simplify communication between clients and servers by employing serialized structured data.
-In our implementation, we have four proto objects. The first is Amount, which is used for placing a bid and includes the bid amount and the bidder’s username. The second is Outcome, which provides a boolean (isFinished) indicating whether the auction has ended, the highest bid (price), and the username of the highest bidder. The third important proto object is Ack, which is a boolean confirming that the bid amount has been acknowledged by the servers.
+In our implementation, we have four proto objects. The first is Amount, which is used for placing a bid and includes the bid amount and the bidder’s username. The second is Outcome, which provides a boolean (isFinished) indicating whether the auction has ended, the highest bid ($price$), and the username of the highest bidder. The third important proto object is Ack, which is a boolean confirming that the bid amount has been acknowledged by the servers.
 The fourth proto object acts like a return void statement, as it does not return any significant data to the system. This is necessary because gRPC does not support void statements.
 
-\subsection{1st Correctness}
+\section{1st Correctness}
 If a system is linearizable it means that the systems needs to process operations according to their real-time invocation.
 This includes the travel time of messages sent in the system. So if user farther away from a server sends a request,
 that request has to be processed before a possible closer invocation.
@@ -66,16 +66,14 @@ This is easier to deal with, and if the nodes in the demo locked a central datab
 Altough that would mean that there is a single point of failure on the database that also would need to be accounted for.
 
 \section{2nd. Correctness}
-In the absence of failure, the implementation is designed in the way to ensure correctness of bidding and consistency of the right results.
+In the absence of failures, the implementation is designed to ensure the correctness of bidding, protocol resilience, and consistency of results.
 \\
-We ensure that our protocol is correct in presence of failure, with the use of active replication. 
-If a server fails, clients are then still able to interact with other active servers via. the multi-port setup in the `.env` file.
-If any client fails, the `sendBid()` method sends a clients bid to all servers. Even if some nodes fail, others can process the bid ensuring that the ongoing auction continues.
+We ensure that our protocol remains correct in the presence of failures by using active replication. If a server fails, clients can still interact with other active servers via the multi-port setup specified in the .env file. This implementation thus ensures resilience if a server goes down.
 \\
 \\
-The implementation ensures correctness of bidding by making the auction house servers handle the bidding and that the bid is vaild. The implementation does not ensure safety of a condidtion race for two user that bid on the same time.
+The implementation ensures the correctness of bidding by having the auction house servers handle bids and validate them. However, it does not guarantee safety against race conditions when two users bid at the same time.
 \\
-Client can independently query for the results of an open bid, at any time they want. The servers handle these requests and reliably returns the current auction outcome. Because of active replication, we ensure the state of the lates highest bid across of all servers.  
+Clients can independently query the results of an open bid at any time. The servers handle these requests and reliably return the current auction outcome for that server. However, we do not implement any form of consensus between servers. Therefore, the implementation does not ensure consistency of state across the servers.
 \\
 
 \subsection*{Link to Github repository}
