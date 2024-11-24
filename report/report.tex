@@ -4,7 +4,7 @@
 \usepackage{hyperref}
 \usepackage[a4paper]{geometry}
 \usepackage[utf8]{inputenc}
-\usepackage{enumitem}
+\usepackage{enumerate}
 \usepackage{varwidth}
 \usepackage{tasks}
 \usepackage{amsmath}
@@ -22,8 +22,6 @@
 
 \usepackage{listings}
 
-% Change enumerate environments you use letters
-\renewcommand{\theenumi}{\alph{enumi}}
 
 % Set title, author name and date
 \title{Consensus}
@@ -75,6 +73,12 @@ The implementation ensures the correctness of bidding by having the auction hous
 \\
 Clients can independently query the results of an open bid at any time. The servers handle these requests and reliably return the current auction outcome for that server. However, we do not implement any form of consensus between servers. Therefore, the implementation does not ensure consistency of state across the servers.
 \\
+\subsection{Improvements for robustness}
+There are mutible changes that could be done in the current implementation, to further ensure the protocols robustness.\\
+\begin{enumerate}
+    \item The implementation of state replication for $highestBid$ and $highestBidUsername$ across all servers would ensure consistency of state between servers, even if a server failed. This could be done with the use of a leader-based design to maintain the state of the servers.
+    \item The implementation of Lamport Clocks to handle concurrent operations and ensure robustness across the system.
+\end{enumerate}
 
 \subsection*{Link to Github repository}
 
