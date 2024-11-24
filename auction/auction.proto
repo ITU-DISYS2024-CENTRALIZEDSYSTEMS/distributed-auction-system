@@ -1,0 +1,26 @@
+syntax="proto3";
+option go_package="./auction";
+
+service Auction {
+    rpc bid (Amount) returns (Ack);
+    rpc result (AuctionHouse) returns (Outcome);
+}
+
+message Outcome {
+    string username = 1;
+    float price = 2;
+    bool isFinished = 3;
+}
+
+message Amount {
+    float amount = 1;
+    string username = 2;
+}
+
+message Ack {
+    bool acknowledge = 1;
+}
+
+message AuctionHouse{
+
+}
