@@ -20,7 +20,7 @@ type auctionServer struct {
 
 var highestBid int32 = 0
 var highestBidUsername string = ""
-var auctionTime int32 = 30
+var auctionTime float32 = 60
 var openForBids bool = true
 
 // Finds the first available port from an array of ports in .env file. Then returns an listener on that port.
@@ -50,7 +50,7 @@ func selectedPortIndex(ports []string, listener net.Listener) (index int, err er
 
 func auctionTimer() {
 	openForBids = true
-	time.Sleep(time.Duration(auctionTime * int32(time.Second)))
+	time.Sleep(time.Duration(auctionTime * float32(time.Second)))
 	openForBids = false
 }
 

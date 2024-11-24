@@ -1,64 +1,90 @@
 # Client 1
-2024/11/24 11:21:28 Bidding started! Come closer everybody!
-2024/11/24 11:21:28 Write your username (no spaces):
+2024/11/24 11:27:58 Bidding started! Come closer everybody!
+2024/11/24 11:27:58 Write your username (no spaces):
 Johannes
-2024/11/24 11:21:30 Options: bid [amount] ; results
-bid 1000
-2024/11/24 11:21:39 Your bid went through!
-2024/11/24 11:21:39 Your bid went through!
-2024/11/24 11:21:39 Your bid went through!
-2024/11/24 11:21:39 Options: bid [amount] ; results
+2024/11/24 11:28:00 Options: bid [amount] ; results
+bid 2000
+2024/11/24 11:28:04 Your bid went through!
+2024/11/24 11:28:04 Your bid went through!
+2024/11/24 11:28:04 Your bid went through!
+2024/11/24 11:28:04 Options: bid [amount] ; results
 results
-2024/11/24 11:21:53 The auction is over!
-2024/11/24 11:21:53 The winner is: Kevin
-2024/11/24 11:21:53 Payed the amount: 4000 
-2024/11/24 11:21:53 Options: bid [amount] ; results
-bid 8000
-2024/11/24 11:21:57 Your bid went through!
-2024/11/24 11:21:57 Your bid went through!
-2024/11/24 11:21:57 Your bid went through!
-2024/11/24 11:21:57 Options: bid [amount] ; results
+2024/11/24 11:28:14 The auction is not over yet!
+2024/11/24 11:28:14 The highest bid: 7000 
+2024/11/24 11:28:14 Options: bid [amount] ; results
+bid 20000
+2024/11/24 11:28:22 Your bid went through!
+2024/11/24 11:28:22 Your bid went through!
+2024/11/24 11:28:22 Your bid went through!
+2024/11/24 11:28:22 Options: bid [amount] ; results
+bid 100000
+2024/11/24 11:28:34 Your bid went through!
+2024/11/24 11:28:34 Your bid went through!
+2024/11/24 11:28:34 Couldn't send bid to one of the nodes!
+2024/11/24 11:28:34 Options: bid [amount] ; results
 results
-2024/11/24 11:22:07 The auction is over!
-2024/11/24 11:22:07 The winner is: Johannes
-2024/11/24 11:22:07 Payed the amount: 8000 
-2024/11/24 11:22:07 Options: bid [amount] ; results
+2024/11/24 11:28:37 Couldnt get result from one node!
+2024/11/24 11:28:37 The auction is not over yet!
+2024/11/24 11:28:37 The highest bid: 100000 
+2024/11/24 11:28:37 Options: bid [amount] ; results
+results
+2024/11/24 11:29:03 Couldnt get result from one node!
+2024/11/24 11:29:03 The auction is over!
+2024/11/24 11:29:03 The winner is: Kevin
+2024/11/24 11:29:03 Payed the amount: 200000 
+2024/11/24 11:29:03 Options: bid [amount] ; results
 
 # Client 2
-2024/11/24 11:21:32 Bidding started! Come closer everybody!
-2024/11/24 11:21:32 Write your username (no spaces):
+2024/11/24 11:28:06 Bidding started! Come closer everybody!
+2024/11/24 11:28:06 Write your username (no spaces):
 Kevin
-2024/11/24 11:21:34 Options: bid [amount] ; results
-bid 2000
-2024/11/24 11:21:44 Your bid went through!
-2024/11/24 11:21:44 Your bid went through!
-2024/11/24 11:21:44 Your bid went through!
-2024/11/24 11:21:44 Options: bid [amount] ; results
-bid 4000
-2024/11/24 11:21:50 Your bid went through!
-2024/11/24 11:21:50 Your bid went through!
-2024/11/24 11:21:50 Your bid went through!
-2024/11/24 11:21:50 Options: bid [amount] ; results
+2024/11/24 11:28:08 Options: bid [amount] ; results
+bid 7000
+2024/11/24 11:28:10 Your bid went through!
+2024/11/24 11:28:10 Your bid went through!
+2024/11/24 11:28:10 Your bid went through!
+2024/11/24 11:28:10 Options: bid [amount] ; results
+bid 50000
+2024/11/24 11:28:27 Your bid went through!
+2024/11/24 11:28:27 Your bid went through!
+2024/11/24 11:28:27 Your bid went through!
+2024/11/24 11:28:27 Options: bid [amount] ; results
+bid 200000
+2024/11/24 11:28:45 Your bid went through!
+2024/11/24 11:28:45 Your bid went through!
+2024/11/24 11:28:45 Couldn't send bid to one of the nodes!
+2024/11/24 11:28:45 Options: bid [amount] ; results
 results
-2024/11/24 11:22:01 The auction is over!
-2024/11/24 11:22:01 The winner is: Johannes
-2024/11/24 11:22:01 Payed the amount: 8000 
-2024/11/24 11:22:01 Options: bid [amount] ; results
+2024/11/24 11:28:52 Couldnt get result from one node!
+2024/11/24 11:28:52 The auction is not over yet!
+2024/11/24 11:28:52 The highest bid: 200000 
+2024/11/24 11:28:52 Options: bid [amount] ; results
+results
+2024/11/24 11:29:08 Couldnt get result from one node!
+2024/11/24 11:29:08 The auction is over!
+2024/11/24 11:29:08 The winner is: Kevin
+2024/11/24 11:29:08 Payed the amount: 200000 
+2024/11/24 11:29:08 Options: bid [amount] ; results
 
 # Server 1
-2024/11/24 11:21:39 Bid acknowledged from: Johannes of the amount: 1000 
-2024/11/24 11:21:44 Bid acknowledged from: Kevin of the amount: 2000 
-2024/11/24 11:21:50 Bid acknowledged from: Kevin of the amount: 4000 
-2024/11/24 11:21:57 Bid acknowledged from: Johannes of the amount: 8000
+2024/11/24 11:28:04 Bid acknowledged from: Johannes of the amount: 2000 
+2024/11/24 11:28:10 Bid acknowledged from: Kevin of the amount: 7000 
+2024/11/24 11:28:22 Bid acknowledged from: Johannes of the amount: 20000 
+2024/11/24 11:28:27 Bid acknowledged from: Kevin of the amount: 50000 
+2024/11/24 11:28:34 Bid acknowledged from: Johannes of the amount: 100000 
+2024/11/24 11:28:45 Bid acknowledged from: Kevin of the amount: 200000
 
 # Server 2
-2024/11/24 11:21:39 Bid acknowledged from: Johannes of the amount: 1000 
-2024/11/24 11:21:44 Bid acknowledged from: Kevin of the amount: 2000 
-2024/11/24 11:21:50 Bid acknowledged from: Kevin of the amount: 4000 
-2024/11/24 11:21:57 Bid acknowledged from: Johannes of the amount: 8000
+2024/11/24 11:28:04 Bid acknowledged from: Johannes of the amount: 2000 
+2024/11/24 11:28:10 Bid acknowledged from: Kevin of the amount: 7000 
+2024/11/24 11:28:22 Bid acknowledged from: Johannes of the amount: 20000 
+2024/11/24 11:28:27 Bid acknowledged from: Kevin of the amount: 50000 
+2024/11/24 11:28:34 Bid acknowledged from: Johannes of the amount: 100000 
+2024/11/24 11:28:45 Bid acknowledged from: Kevin of the amount: 200000
 
 # Server 3
-2024/11/24 11:21:39 Bid acknowledged from: Johannes of the amount: 1000 
-2024/11/24 11:21:44 Bid acknowledged from: Kevin of the amount: 2000 
-2024/11/24 11:21:50 Bid acknowledged from: Kevin of the amount: 4000 
-2024/11/24 11:21:57 Bid acknowledged from: Johannes of the amount: 8000
+2024/11/24 11:28:04 Bid acknowledged from: Johannes of the amount: 2000 
+2024/11/24 11:28:10 Bid acknowledged from: Kevin of the amount: 7000 
+2024/11/24 11:28:22 Bid acknowledged from: Johannes of the amount: 20000 
+2024/11/24 11:28:27 Bid acknowledged from: Kevin of the amount: 50000 
+^Csignal: interrupt
