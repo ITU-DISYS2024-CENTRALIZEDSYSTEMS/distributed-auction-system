@@ -8,7 +8,6 @@ import (
 	"net"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -17,13 +16,11 @@ import (
 
 type auctionServer struct {
 	proto.UnimplementedAuctionServer
-	lamportTime int32
-	_           sync.Mutex
 }
 
-var highestBid float32 = 0
+var highestBid int32 = 0
 var highestBidUsername string = ""
-var auctionTime float32 = 30
+var auctionTime float32 = 60
 var openForBids bool = true
 
 // Finds the first available port from an array of ports in .env file. Then returns an listener on that port.
@@ -62,12 +59,12 @@ func (s *auctionServer) Bid(_ context.Context, amount *proto.Amount) (*proto.Ack
 
 	if amount.Amount <= highestBid {
 		ackResponse.Acknowledge = false
-		log.Printf("\nBid refused from: %s of the amount: %f \n", amount.Username, amount.Amount)
+		log.Printf("\nBid refused from: %s of the amount: %d \n", amount.Username, amount.Amount)
 	} else {
 		highestBid = amount.Amount
 		highestBidUsername = amount.Username
 		ackResponse.Acknowledge = true
-		log.Printf("\nBid acknowledged from: %s of the amount: %f \n", amount.Username, amount.Amount)
+		log.Printf("\nBid acknowledged from: %s of the amount: %d \n", amount.Username, amount.Amount)
 	}
 
 	return &ackResponse, nil
@@ -96,9 +93,7 @@ func main() {
 
 	server := grpc.NewServer()
 
-	service := &auctionServer{
-		lamportTime: 0,
-	}
+	service := &auctionServer{}
 
 	proto.RegisterAuctionServer(server, service)
 
