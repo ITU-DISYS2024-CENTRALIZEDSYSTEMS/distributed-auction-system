@@ -1,0 +1,68 @@
+% report.tex
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{varwidth}
+\usepackage{tasks}
+% Import packages
+\usepackage[a4paper]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+
+\usepackage{graphicx}
+
+\usepackage{listings}
+
+% Change enumerate environments you use letters
+\renewcommand{\theenumi}{\alph{enumi}}
+
+% Set title, author name and date
+\title{Consensus}
+\author{Johannes Jørgensen (jgjo),\\ Kevin Skovgaard Gravesen (kegr),\\ Joakim Andreasen (joaan)} 
+\date{\today}
+
+\begin{document} 
+
+\maketitle
+
+\subsection{Introduction}
+A short introduction to what you have done.
+\subsection{Architecture}
+A description of the architecture of the system and its protocols (behaviour), including any protocols used internally between nodes of the system. 
+\subsection{Correctness}
+Argue whether your implementation satisfies linearisability or sequential consistency. In order to do so, first, you must state precisely what such property is. 
+\subsection{Correctness 2.}
+An argument that your protocol is correct in the absence and the presence of failure
+
+\newpage
+\subsection*{Link to Github repository}
+
+\href{https://github.com/ITU-DISYS2024-CENTRALIZEDSYSTEMS/Consensus}{https://github.com/ITU-DISYS2024-CENTRALIZEDSYSTEMS/Consensus}
+
+\subsection*{Appendix}
+
+\subsubsection*{Logs - Peer #1}
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+
+\end{lstlisting}
+
+\subsubsection*{Logs - Peer #2}
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+
+\end{lstlisting}
+
+\subsubsection*{Logs - Peer #3}
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+
+\end{lstlisting}
+\end{document}
