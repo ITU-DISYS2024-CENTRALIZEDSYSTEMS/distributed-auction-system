@@ -42,8 +42,16 @@ The demo assumes that no messages are lost, which would require some alteration 
 
 \subsection{Architecture}
 A description of the architecture of the system and its protocols (behaviour), including any protocols used internally between nodes of the system. 
+
+Our implementation of the distributed auction system applies the active replication principle, which means that the installed servers do not have a primary, but rather they all have direct connection to the clients. 
+Therefore to validate the responses given by the servers, we implemented a system that compares all responses from the servers and picks the respons that occurs the most. This is to make sure that no corrupt server can output an incorrect respons to trick the client.
+Furthermore it ensures that one server can crash or be out of order, while the clients can still access the service, without any downtime. The communication between client and servers is being done throught the use of GRPC and protocol buffers (proto). 
+this means that our service have 2 API's, one for bidding (bid) and one for getting the results of the auction (result). These API's makes use of proto-objects, that makes the communication between client and server easier by using serialized structured data.
+In our implementation we have 4 proto-objects. One named Amount, which is designated for bidding on an auction with the bid-amount and a bidder (username). Another one named Outcome, which provides a boolean (isFinished) that describes wether the auction is over or not, a price (the highest bid) and a bidder (username). The last important proto-object is the Ack, which is just a boolean that ensures the bidded amount is acknowledged by the servers. The forth proto-object behaves like a return void statement, that doesn't return anything of importance to the system. This is done as GRPC does not support void statements.
+
 \subsection{Correctness 1.}
 Argue whether your implementation satisfies linearisability or sequential consistency. In order to do so, first, you must state precisely what such property is.
+
 
 If a system is linearizable it means that the systems needs to process operations according to their real-time invocation.
 This includes the travel time of messages sent in the system. So if user farther away from a server sends a request,
