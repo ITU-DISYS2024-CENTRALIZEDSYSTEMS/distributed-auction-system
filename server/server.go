@@ -8,7 +8,6 @@ import (
 	"net"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -17,8 +16,6 @@ import (
 
 type auctionServer struct {
 	proto.UnimplementedAuctionServer
-	lamportTime int32
-	_           sync.Mutex
 }
 
 var highestBid float32 = 0
@@ -96,9 +93,7 @@ func main() {
 
 	server := grpc.NewServer()
 
-	service := &auctionServer{
-		lamportTime: 0,
-	}
+	service := &auctionServer{ }
 
 	proto.RegisterAuctionServer(server, service)
 
