@@ -48,7 +48,7 @@ The fourth proto object acts like a return void statement, as it does not return
 
 \section{1st Correctness}
 If a system is linearizable it means that the systems needs to process operations according to their real-time invocation.
-This includes the travel time of messages sent in the system. So if user farther away from a server sends a request,
+This includes the travel time of messages sent in the system. So if a user farther away from a server sends a request,
 that request has to be processed before a possible closer invocation.
 
 This demo does not satisfy this requirement because of potential race conditions between the servers (nodes) and clients.
