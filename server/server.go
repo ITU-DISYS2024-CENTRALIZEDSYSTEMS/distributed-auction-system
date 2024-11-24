@@ -8,7 +8,6 @@ import (
 	"net"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -17,8 +16,6 @@ import (
 
 type auctionServer struct {
 	proto.UnimplementedAuctionServer
-	lamportTime int32
-	_           sync.Mutex
 }
 
 var highestBid float32 = 0
