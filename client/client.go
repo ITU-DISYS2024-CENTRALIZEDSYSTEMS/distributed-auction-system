@@ -47,13 +47,13 @@ func main() {
 		inputList := strings.Split(input.Text(), " ")
 		if inputList[0] == "bid" {
 			bid := proto.Amount{}
-			bidAmount, err := strconv.ParseFloat(inputList[1], 32)
+			bidAmount, err := strconv.ParseInt(inputList[1], 10, 32)
 			if err != nil {
 				log.Println("The bid is not a number: 'bid [decimal number]'")
 				continue
 			}
 
-			bid.Amount = float32(bidAmount)
+			bid.Amount = int32(bidAmount)
 			bid.Username = username
 
 			sendBid(&bid, clients)
@@ -67,11 +67,11 @@ func main() {
 			if outcome.IsFinished {
 				log.Println("The auction is over!")
 				log.Println("The winner is: " + outcome.Username)
-				log.Printf("Payed the amount: %f \n", outcome.Price)
+				log.Printf("Payed the amount: %d \n", outcome.Price)
 			} else {
 				log.Println("The auction is not over yet!")
 
-				log.Printf("The highest bid: %f \n", outcome.Price)
+				log.Printf("The highest bid: %d \n", outcome.Price)
 			}
 		} else {
 			log.Println("Unknown command!")

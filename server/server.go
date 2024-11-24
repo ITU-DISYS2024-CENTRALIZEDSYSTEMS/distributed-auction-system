@@ -18,9 +18,9 @@ type auctionServer struct {
 	proto.UnimplementedAuctionServer
 }
 
-var highestBid float32 = 0
+var highestBid int32 = 0
 var highestBidUsername string = ""
-var auctionTime float32 = 30
+var auctionTime int32 = 30
 var openForBids bool = true
 
 // Finds the first available port from an array of ports in .env file. Then returns an listener on that port.
@@ -50,7 +50,7 @@ func selectedPortIndex(ports []string, listener net.Listener) (index int, err er
 
 func auctionTimer() {
 	openForBids = true
-	time.Sleep(time.Duration(auctionTime * float32(time.Second)))
+	time.Sleep(time.Duration(auctionTime * int32(time.Second)))
 	openForBids = false
 }
 
@@ -59,12 +59,12 @@ func (s *auctionServer) Bid(_ context.Context, amount *proto.Amount) (*proto.Ack
 
 	if amount.Amount <= highestBid {
 		ackResponse.Acknowledge = false
-		log.Printf("\nBid refused from: %s of the amount: %f \n", amount.Username, amount.Amount)
+		log.Printf("\nBid refused from: %s of the amount: %d \n", amount.Username, amount.Amount)
 	} else {
 		highestBid = amount.Amount
 		highestBidUsername = amount.Username
 		ackResponse.Acknowledge = true
-		log.Printf("\nBid acknowledged from: %s of the amount: %f \n", amount.Username, amount.Amount)
+		log.Printf("\nBid acknowledged from: %s of the amount: %d \n", amount.Username, amount.Amount)
 	}
 
 	return &ackResponse, nil
@@ -93,7 +93,7 @@ func main() {
 
 	server := grpc.NewServer()
 
-	service := &auctionServer{ }
+	service := &auctionServer{}
 
 	proto.RegisterAuctionServer(server, service)
 
