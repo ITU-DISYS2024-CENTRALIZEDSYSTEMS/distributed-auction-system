@@ -69,7 +69,7 @@ Altough that would mean that there is a single point of failure on the database 
 In the absence of failure, the implementation is designed in the way to ensure correctness of bidding and consistency of the right results.
 \\
 We ensure that our protocol is correct in presence of failure, with the use of active replication. 
-If a server fails, client are then still able to interact with other active servers via. the multi-port setup in the `.env` file.
+If a server fails, clients are then still able to interact with other active servers via. the multi-port setup in the `.env` file.
 If a clients fails, the `sendBid()` method sends a clients bid to all servers. Even if some nodes fail, others can process the bid ensuring that the ongoing auction continues.
 \\
 \\
