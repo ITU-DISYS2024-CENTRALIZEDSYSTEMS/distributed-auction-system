@@ -96,9 +96,7 @@ func main() {
 
 	server := grpc.NewServer()
 
-	service := &auctionServer{
-		lamportTime: 0,
-	}
+	service := &auctionServer{ }
 
 	proto.RegisterAuctionServer(server, service)
 
